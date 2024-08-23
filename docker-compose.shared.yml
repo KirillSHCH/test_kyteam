@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: kyteam-db
+    image: 'postgres:13.6'
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data/db-data:/var/lib/postgresql/data:z
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - '${REDIS_PORT}:6379'
+    volumes:
+      - ./redis:/data
+
+volumes:
+  redis:
+    driver: local
+
+networks:
+  default:
+    name: kyteam-network

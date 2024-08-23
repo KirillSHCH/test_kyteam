@@ -1,0 +1,10 @@
+/dist
+/node_modules
+logs
+*.log
+/coverage
+/.nyc_output
+/.idea
+.env
+/data
+/redis
